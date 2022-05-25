@@ -1,0 +1,35 @@
+
+[
+  {
+    "name": "iPhone X1",
+    "img":"https://fdn2.gsmarena.com/vv/bigpic/apple-iphone-x.jpg",
+    "description":"Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nostrum, in temporibus. Maiores ratione deleniti dolore impedit eligendi voluptas vitae ipsam.",
+    "price":"1100",
+    "quantity":"1000",
+    "minQuantity":"50"
+  },
+  {
+    "name": "iPhone X2",
+    "img":"https://fdn2.gsmarena.com/vv/bigpic/apple-iphone-x.jpg",
+    "description":"Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nostrum, in temporibus. Maiores ratione deleniti dolore impedit eligendi voluptas vitae ipsam.",
+    "price":"1100",
+    "quantity":"1000",
+    "minQuantity":"50"
+  },
+  {
+    "name": "iPhone X3",
+    "img":"https://fdn2.gsmarena.com/vv/bigpic/apple-iphone-x.jpg",
+    "description":"Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nostrum, in temporibus. Maiores ratione deleniti dolore impedit eligendi voluptas vitae ipsam.",
+    "price":"1100",
+    "quantity":"1000",
+    "minQuantity":"50"
+  },
+  {
+    "name": "iPhone X4",
+    "img":"https://fdn2.gsmarena.com/vv/bigpic/apple-iphone-x.jpg",
+    "description":"Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nostrum, in temporibus. Maiores ratione deleniti dolore impedit eligendi voluptas vitae ipsam.",
+    "price":"1100",
+    "quantity":"1000",
+    "minQuantity":"50"
+  }
+]
