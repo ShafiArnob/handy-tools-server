@@ -16,7 +16,7 @@ app.use(express.json())
 
 const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@cluster0.jcavx.mongodb.net/?retryWrites=true&w=majority`;
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
-console.log(uri);
+
 
 async function run(){
   try{
@@ -25,6 +25,7 @@ async function run(){
 
     const productsCollection = client.db('tool-website').collection('products')
     const userCollection = client.db('tool-website').collection('users');
+    const ordersCollection = client.db('tool-website').collection('orders');
 
     //Get Products
     app.get('/products', async(req,res)=>{
@@ -49,6 +50,13 @@ async function run(){
       res.send(result)
     })
 
+    //add orders 
+    app.post('/orders', async(req, res)=>{
+      const newOrder = req.body
+      const result  = await ordersCollection.insertOne(newOrder) 
+      res.send({result})
+    })
+
     //Get user
     app.get('/user', async (req, res) => {
       const users = await userCollection.find().toArray();
@@ -67,7 +75,7 @@ async function run(){
       res.send({ result});
     });
 
-    
+
   }
   finally{
 
