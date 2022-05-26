@@ -24,7 +24,9 @@ async function run(){
     console.log("Hello");
 
     const productsCollection = client.db('tool-website').collection('products')
+    const userCollection = client.db('tool-website').collection('users');
 
+    //Get Products
     app.get('/products', async(req,res)=>{
       const size = parseInt(req.query.size)
       const query = {}
@@ -39,6 +41,33 @@ async function run(){
 
       res.send(products)
     })
+    //get one
+    app.get('/products/:id', async(req, res) =>{
+      const id = req.params.id
+      const query = {_id:ObjectId(id)}
+      const result = await productsCollection.findOne(query)
+      res.send(result)
+    })
+
+    //Get user
+    app.get('/user', async (req, res) => {
+      const users = await userCollection.find().toArray();
+      res.send(users);
+    });
+    //add user to mongo
+    app.put('/user/:email', async (req, res) => {
+      const email = req.params.email;
+      const user = req.body;
+      const filter = { email: email };
+      const options = { upsert: true };
+      const updateUser = {
+        $set: user,
+      };
+      const result = await userCollection.updateOne(filter, updateUser, options);
+      res.send({ result});
+    });
+
+    
   }
   finally{
 
