@@ -26,7 +26,9 @@ async function run(){
     const productsCollection = client.db('tool-website').collection('products')
     const userCollection = client.db('tool-website').collection('users');
     const ordersCollection = client.db('tool-website').collection('orders');
-
+    //Products
+    //=================================================
+    
     //Get Products
     app.get('/products', async(req,res)=>{
       const size = parseInt(req.query.size)
@@ -42,6 +44,7 @@ async function run(){
 
       res.send(products)
     })
+    
     //get one
     app.get('/products/:id', async(req, res) =>{
       const id = req.params.id
@@ -49,19 +52,35 @@ async function run(){
       const result = await productsCollection.findOne(query)
       res.send(result)
     })
-
+    //==================================================
+    //Orders
+    //==================================================
+    
     //add orders 
     app.post('/orders', async(req, res)=>{
       const newOrder = req.body
       const result  = await ordersCollection.insertOne(newOrder) 
-      res.send({result})
+      res.send(result)
     })
 
+    //Get orders of specific email
+    app.get('/orders/:email', async(req, res)=>{
+      const email = req.params.email
+      const query = {email:email}
+      const result  = await ordersCollection.find(query).toArray() 
+      res.send(result)
+    })
+
+    //==================================================
+    //Users
+    //==================================================
+    
     //Get user
     app.get('/user', async (req, res) => {
       const users = await userCollection.find().toArray();
       res.send(users);
     });
+    
     //add user to mongo
     app.put('/user/:email', async (req, res) => {
       const email = req.params.email;
