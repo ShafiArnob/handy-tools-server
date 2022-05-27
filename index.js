@@ -26,6 +26,8 @@ async function run(){
     const productsCollection = client.db('tool-website').collection('products')
     const userCollection = client.db('tool-website').collection('users');
     const ordersCollection = client.db('tool-website').collection('orders');
+    
+    //=================================================
     //Products
     //=================================================
     
@@ -50,6 +52,13 @@ async function run(){
       const id = req.params.id
       const query = {_id:ObjectId(id)}
       const result = await productsCollection.findOne(query)
+      res.send(result)
+    })
+
+    //add product
+    app.post('/products', async(req, res)=>{
+      const newOrder = req.body
+      const result  = await productsCollection.insertOne(newOrder) 
       res.send(result)
     })
     //==================================================
