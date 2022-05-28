@@ -72,7 +72,19 @@ async function run(){
     //==================================================
     //Orders
     //==================================================
-    
+    //get all orders
+    app.get('/orders', async (req, res) => {
+      const reviews = await ordersCollection.find().toArray();
+      res.send(reviews);
+    });
+
+    //Get orders of specific email
+    app.get('/orders/:email', async(req, res)=>{
+      const email = req.params.email
+      const query = {email:email}
+      const result  = await ordersCollection.find(query).toArray() 
+      res.send(result)
+    })
     //add orders 
     app.post('/orders', async(req, res)=>{
       const newOrder = req.body
@@ -85,13 +97,7 @@ async function run(){
       const result = await ordersCollection.deleteOne(query)
       res.send(result)
     })
-    //Get orders of specific email
-    app.get('/orders/:email', async(req, res)=>{
-      const email = req.params.email
-      const query = {email:email}
-      const result  = await ordersCollection.find(query).toArray() 
-      res.send(result)
-    })
+    
 
     //==================================================
     //Users
@@ -166,12 +172,13 @@ async function run(){
     //Reviews
     //==================================================
     
-    
+    //get all reviews
     app.get('/reviews', async (req, res) => {
       const reviews = await reviewsCollection.find().toArray();
       res.send(reviews);
     });
-
+    
+    //add or update review
     app.put('/reviews/:email', async (req, res) => {
       const email = req.params.email;
       const review = req.body;
