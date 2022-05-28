@@ -28,6 +28,7 @@ async function run(){
     const profileCollection = client.db('tool-website').collection('profiles');
     const ordersCollection = client.db('tool-website').collection('orders');
     const reviewsCollection = client.db('tool-website').collection('reviews');
+    
     //=================================================
     //Products
     //=================================================
@@ -69,9 +70,11 @@ async function run(){
       const result = await productsCollection.deleteOne(query)
       res.send(result)
     })
+    
     //==================================================
     //Orders
     //==================================================
+    
     //get all orders
     app.get('/orders', async (req, res) => {
       const reviews = await ordersCollection.find().toArray();
@@ -85,6 +88,7 @@ async function run(){
       const result  = await ordersCollection.find(query).toArray() 
       res.send(result)
     })
+    
     //add orders 
     app.post('/orders', async(req, res)=>{
       const newOrder = req.body
