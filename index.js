@@ -165,7 +165,14 @@ async function run(){
     //==================================================
     //Reviews
     //==================================================
-    app.put('/review/:email', async (req, res) => {
+    
+    
+    app.get('/reviews', async (req, res) => {
+      const reviews = await reviewsCollection.find().toArray();
+      res.send(reviews);
+    });
+
+    app.put('/reviews/:email', async (req, res) => {
       const email = req.params.email;
       const review = req.body;
       const filter = {email:email};
