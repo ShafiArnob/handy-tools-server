@@ -25,8 +25,9 @@ async function run(){
 
     const productsCollection = client.db('tool-website').collection('products')
     const userCollection = client.db('tool-website').collection('users');
+    const profileCollection = client.db('tool-website').collection('profiles');
     const ordersCollection = client.db('tool-website').collection('orders');
-    
+    const reviewsCollection = client.db('tool-website').collection('reviews');
     //=================================================
     //Products
     //=================================================
@@ -133,6 +134,48 @@ async function run(){
       const isAdmin = user.role === 'admin';
       res.send({ admin: isAdmin })
     })
+    
+    //==================================================
+    //Profile
+    //==================================================
+    
+    //get profile
+    app.get('/profile/:email', async(req, res) =>{
+
+      const email = req.params.email
+      console.log(email);
+      const query = {email:email}
+      const result = await profileCollection.findOne(query)
+      res.send(result)
+    })
+    
+    //add or update profile
+    app.put('/profile/:email', async (req, res) => {
+      const email = req.params.email;
+      const profile = req.body;
+      const filter = {email:email};
+      const options = { upsert: true };
+      const updateProfile = {
+        $set: profile,
+      };
+      const result = await profileCollection.updateOne(filter, updateProfile, options);
+      res.send(result);
+    });
+
+    //==================================================
+    //Reviews
+    //==================================================
+    app.put('/review/:email', async (req, res) => {
+      const email = req.params.email;
+      const review = req.body;
+      const filter = {email:email};
+      const options = { upsert: true };
+      const updateReview = {
+        $set: review,
+      };
+      const result = await reviewsCollection.updateOne(filter, updateReview, options);
+      res.send(result);
+    });
   }
 
   finally{
