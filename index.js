@@ -21,7 +21,7 @@ const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology:
 async function run(){
   try{
     await client.connect()
-    console.log("Hello");
+    // console.log("Hello");
 
     const productsCollection = client.db('tool-website').collection('products')
     const userCollection = client.db('tool-website').collection('users');
@@ -153,7 +153,7 @@ async function run(){
     app.get('/profile/:email', async(req, res) =>{
 
       const email = req.params.email
-      console.log(email);
+      // console.log(email);
       const query = {email:email}
       const result = await profileCollection.findOne(query)
       res.send(result)
